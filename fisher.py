@@ -17,4 +17,3 @@ if __name__ == '__main__':
     # 生产环境下，fish-python不是入口文件
     # 生产环境下，加此判断，不会启动flask服务器
     app.run(host='0.0.0.0', debug=app.config['DEBUG'])
-
