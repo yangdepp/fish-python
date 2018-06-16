@@ -1,4 +1,6 @@
-from flask import Flask, make_response
+from flask import Flask
+from helper import is_isbn_or_key
+from yushu_book import YuShuBook
 
 __author__ = 'yang'
 
@@ -7,24 +9,16 @@ app.config.from_object('config')
 
 
 # mvc的概念中，视图函数就是c的意思
-@app.route('/hello')
-def hello():
-    # 基于类的视图（即插视图）
-    # status code :200 404 301
-    # content-type http headers
-    # content-type = text/html （默认）
-    # response
-    headers = {
-        'content-type': 'application/json',
-        'location': 'http://www.baidu.com'
-    }
-    response = make_response('<html></html>', 301)
-    response.headers = headers
-    return response
-    # return '<a href="http://baidu.com">哈哈哈</a>'
+@app.route('/book/search/<q>/<page>')
+def search(q, page):
+    """
+        q：普通关键字  isbn
+        page
+    """
+    isbn_or_key = is_isbn_or_key(q)
+    if isbn_or_key == 'isbn':
+        YuShuBook.search_by_isbn(q)
 
 
 if __name__ == '__main__':
-    # 生产环境下，fish-python不是入口文件
-    # 生产环境下，加此判断，不会启动flask服务器
     app.run(host='0.0.0.0', debug=app.config['DEBUG'])
