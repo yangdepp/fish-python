@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, make_response
 
 __author__ = 'yang'
 
@@ -10,7 +10,18 @@ app.config.from_object('config')
 @app.route('/hello')
 def hello():
     # 基于类的视图（即插视图）
-    return '<a href="http://baidu.com">哈哈哈</a>'
+    # status code :200 404 301
+    # content-type http headers
+    # content-type = text/html （默认）
+    # response
+    headers = {
+        'content-type': 'application/json',
+        'location': 'http://www.baidu.com'
+    }
+    response = make_response('<html></html>', 301)
+    response.headers = headers
+    return response
+    # return '<a href="http://baidu.com">哈哈哈</a>'
 
 
 if __name__ == '__main__':
