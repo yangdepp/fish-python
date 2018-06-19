@@ -3,7 +3,6 @@ from . import web
 
 __author__ = 'yang'
 
-
 # @web.route('url')
 # def login():
 #     pass
