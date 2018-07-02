@@ -1,7 +1,7 @@
 # create by 'yang' in 2018/6/16
 import json
 
-from flask import jsonify, request, render_template
+from flask import jsonify, request, render_template, flash
 
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
@@ -30,9 +30,17 @@ def search():
             yushu_book.search_by_keyword(q, page)
 
         books.fill(yushu_book, q)
-        return json.dumps(books, default=lambda o: o.__dict__)
+        # return json.dumps(books, default=lambda o: o.__dict__)
     else:
-        return jsonify(form.errors)
+        flash('搜索的关键字不符合要求，请重新输入关键字')
+        # return jsonify(form.errors)
+
+    return render_template('search_result.html', books=books)
+
+
+@web.route('/book/<isbn>/detail')
+def book_detail(isbn):
+    pass
 
 
 @web.route('/test')
@@ -42,4 +50,6 @@ def test():
         'age': 25
     }
     # 引入模板
+    flash('hello 杨', category='error')
+    flash('hello, 璇', category='warning')
     return render_template('test.html', data=r)
