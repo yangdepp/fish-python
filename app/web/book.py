@@ -1,7 +1,7 @@
 # create by 'yang' in 2018/6/16
 import json
 
-from flask import jsonify, request
+from flask import jsonify, request, render_template
 
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
@@ -33,3 +33,13 @@ def search():
         return json.dumps(books, default=lambda o: o.__dict__)
     else:
         return jsonify(form.errors)
+
+
+@web.route('/test')
+def test():
+    r = {
+        'name': '',
+        'age': 25
+    }
+    # 引入模板
+    return render_template('test.html', data=r)

@@ -1,0 +1,19 @@
+{#Jinja2模板语法，这是一段注释#}
+{# test继承layout.html #}
+{% extends 'layout.html' %}
+{% block content %}
+    {{ super() }}
+    <p>杨</p>
+    <span>年龄：</span> {{ data.age }}
+    {% if data.age < 25 %}
+        {{ data.name }}
+    {% elif data.age == 25 %}
+        <p>不算太年轻了</p>
+        do something 吧！！！
+        <span>名字：</span>
+        {{ data.school | default('未名') }}   {# default是过滤不存在的某个属性 #}
+    {% else %}
+        {{ data.age }}
+    {% endif %}
+{% endblock %}
+
