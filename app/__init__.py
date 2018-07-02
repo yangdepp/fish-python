@@ -1,6 +1,7 @@
 # create by 'yang' in 2018/6/16
 from flask import Flask
 from app.models.book import db
+
 __author__ = 'yang'
 
 
