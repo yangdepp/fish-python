@@ -1,6 +1,6 @@
 from . import web
 
-__author__ = '七月'
+__author__ = 'yang'
 
 
 @web.route('/drift/<int:gid>', methods=['GET', 'POST'])

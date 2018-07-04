@@ -33,5 +33,10 @@ class YuShuBook:
         result = HTTP.get(url)
         self.__fill__collection(result)
 
-    def calculate_start(self, page):
+    @staticmethod
+    def calculate_start(page):
         return (page - 1) * current_app.config['PRE_PAGE']
+
+    @property
+    def first(self):
+        return self.books[0] if self.total >= 0 else None

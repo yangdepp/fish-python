@@ -1,13 +1,12 @@
 # create by 'yang' in 2018/6/16
 from sqlalchemy import Column, Integer, String
-from flask_sqlalchemy import SQLAlchemy
+
+from app.models.base import Base
 
 __author__ = 'yang'
 
-db = SQLAlchemy()
 
-
-class Book(db.Model):
+class Book(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)  # autoincrement自增长
     title = Column(String(50), nullable=False)  # 标题
     author = Column(String(30), default='未名')  # 作者
